@@ -1,10 +1,11 @@
 package httpsvr
 
 import (
-	"careyads/esserver/handler"
-	"careyads/esserver/httpctx"
-	"careyads/esserver/service/elastic"
-	"careyads/tools/logrus"
+	"logcat/consumer/handler"
+	"logcat/consumer/httpctx"
+
+	"logcat/consumer/service/elastic"
+	"logcat/tools/logrus"
 	"os"
 
 	"github.com/kataras/iris"
@@ -35,20 +36,16 @@ func NewHttpServer(es *elastic.ElasticManager) *HttpServer {
 
 func (this *HttpServer) Start() {
 
-	//this.LoadData()
+	this.LoadData()
+
+	kaMap := handler.NewKafkaMap([]string{"android", "ios", "stream"})
+	kaMap.Run()
 
 	this.App.Handle("GET", "/", func(ctx iris.Context) {
 		ctx.HTML("Hello world!")
 	})
 
-	api := this.App.Party("/esserver")
-	{
-		api.Post("/findes", this.Wrap(handler.FindEs))
-
-		api.Post("/ping", func(ctx iris.Context) {
-			ctx.WriteString("pong")
-		})
-	}
+	this.App.Post("/findes", this.Wrap(handler.FindEs))
 
 	err := this.App.Run(iris.Addr(":8090"), iris.WithoutServerError(iris.ErrServerClosed))
 
@@ -58,8 +55,6 @@ func (this *HttpServer) Start() {
 
 		os.Exit(1)
 	}
-
-	//this.gin.GET("/ws", Controller.Upload)
 
 }
 

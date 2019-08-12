@@ -1,7 +1,7 @@
 package kafka
 
 import (
-	"careyads/esserver/constant"
+	"logcat/consumer/constant"
 	"fmt"
 	"log"
 	"os"

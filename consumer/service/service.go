@@ -1,33 +1,34 @@
 package service
 
 import (
-	"careyads/esserver/httpsvr"
-	"careyads/esserver/service/elastic"
-	"careyads/esserver/service/kafka"
+	"logcat/consumer/httpsvr"
+	"logcat/consumer/service/elastic"
+	"logcat/consumer/service/kafka"
 )
 
-type EsService struct {
+type Service struct {
 	Elastic *elastic.ElasticManager
 	Kafka   *kafka.KafkaManager
 	Httpsvr *httpsvr.HttpServer
 }
 
-func NewService() *EsService {
+func NewService() *Service {
 
-	//es := elastic.NewEsManager()
+	//ES 或者 HBASE
+	es := elastic.NewEsManager()
 
-	ka := kafka.NewKafkaManager()
+	//ka := kafka.NewKafkaManager()
 
 	httpsvr := httpsvr.NewHttpServer(nil)
 
-	return &EsService{
-		Elastic: nil,
-		Kafka:   ka,
+	return &Service{
+		Elastic: es,
+		Kafka:   nil,
 		Httpsvr: httpsvr,
 	}
 }
 
-func (this *EsService) Start() {
+func (this *Service) Start() {
 
 	//runtime.GOMAXPROCS(runtime.NumCPU()) // 利用CPU多核来处理HTTP请求
 

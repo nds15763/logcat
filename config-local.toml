@@ -1,0 +1,10 @@
+log_level="debug"
+log_dest="console"
+log_dir="./log"
+
+mode="develop"
+daemon=false
+
+httplisten_mode=false
+
+log_type = ["android","ios","stream"]

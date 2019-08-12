@@ -1,11 +1,9 @@
 package httpctx
 
 import (
-	"careyads/esserver/service/elastic"
-	"careyads/esserver/service/kafka"
+	"logcat/consumer/service/elastic"
 )
 
 type ServerContext struct {
 	EsManager *elastic.ElasticManager
-	Kafka     *kafka.KafkaManager
 }

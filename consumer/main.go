@@ -1,21 +1,25 @@
 package main
 
 import (
-	"logcat/esserver/service"
+	"logcat/consumer/service"
 )
 
 func main() {
 
+	// cfg := flag.String("c", "../config-local.toml", "配置文件路径")
+
+	// flag.Parse()
+
+	// params := config.NewConfiguration()
+
+	// if len(*cfg) != 0 {
+	// 	params.InitFromFile(*cfg)
+	// } else {
+	// 	fmt.Println("注意: 使用默认配置!")
+	// }
+
 	s := service.NewService()
 
 	s.Start()
-
-	//1.启动service，初始化es和kafka
-
-	//2.消费kafka 获取clickid
-
-	//3.查询ES
-
-	//4.返回查询结果
 
 }
