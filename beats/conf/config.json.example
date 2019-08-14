@@ -1,0 +1,20 @@
+{
+    "items": [{
+        "post_ip": "192.168.0.1",
+        "port": 5432,
+        "log_type":[{
+            "paths":"../../log/*.log",
+            "topic":"filelog",
+            "type":"error",
+            "RegExp":"{\"type\":\"error\"(.*?)}"
+        },
+        {
+            "paths":"../../log/*.log",
+            "topic":"filelog",
+            "type":"info",
+            "RegExp":"{\"type\":\"info\"(.*?)}"
+        }
+    ]
+    }]
+}
+

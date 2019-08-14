@@ -1,6 +1,9 @@
 package logg
 
 import (
+	"bufio"
+	"io"
+	"log"
 	"logcat/logcatch/httpctx"
 	"logcat/tools/logrus"
 
@@ -11,4 +14,13 @@ func StreamLog(ctx iris.Context, logger *logrus.Logger, context *httpctx.ServerC
 
 	//
 
+	reader := bufio.NewReader(ctx.Request.Body)
+	for {
+		line, err := reader.ReadBytes('\n')
+		if io.EOF == err {
+			break
+		}
+
+		log.Println(string(line))
+	}
 }
